@@ -1,5 +1,8 @@
+#!/usr/bin/env groovy
 pipeline {
-    agent any
+    agent {
+        docker 'openjdk:8u131-jdk'
+    }
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
@@ -23,11 +26,9 @@ pipeline {
                 }
             }
         }
-        stage('docker run') {
+        stage('docker') {
             steps {
-                docker.image('openjdk:8u131-jdk').inside() {
-                    sh 'java -version'
-                }
+                sh 'java -version'
             }
         }
         stage('notification') {
