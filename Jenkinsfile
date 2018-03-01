@@ -10,15 +10,15 @@ pipeline {
 
     stages {
         stage('hello1') {
-            node {
-                steps {
+             steps {
+                node {
                     echo "Hello Hello"
                 }
             }
         }
         stage('notification') {
-            node {
-                steps {
+            steps {
+                node {
                     sh "curl -X POST -H 'X-ChatWorkToken: ${BOT_APIKEY}' -d 'body=test' 'https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages'"
                 }
             }
