@@ -13,11 +13,13 @@ pipeline {
         stage('hello1') {
             steps {
                 script {
-                    echo "Hello Hello ${dev1} ${Environment}"
-                } catch(e) {
-                    sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=FAILURE!!! test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
-                } finally {
-                    // cleaning
+                    try {
+                        echo "Hello Hello ${dev1} ${Environment}"
+                    } catch(e) {
+                        sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=FAILURE!!! test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                    } finally {
+                        // cleaning
+                    }
                 }
             }
         }
