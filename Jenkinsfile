@@ -6,6 +6,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         BOT_APIKEY = credentials('chatwork.bot.apikey')
         TEST_ROOM_ID = credentials('chatwork.room.test')
+        KEY1 = credentials("${env}.key1")
     }
 
     stages {
@@ -16,7 +17,7 @@ pipeline {
         }
         stage('notification') {
             steps {
-                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1}\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
             }
         }
     }
