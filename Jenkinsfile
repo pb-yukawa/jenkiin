@@ -6,7 +6,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         BOT_APIKEY = credentials('chatwork.bot.apikey')
         TEST_ROOM_ID = credentials('chatwork.room.test')
-        KEY1 = credentials("${env}.key1")
+        KEY1 = credentials(env + '.key1')
     }
 
     stages {
