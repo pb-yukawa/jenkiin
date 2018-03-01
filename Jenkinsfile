@@ -9,25 +9,16 @@ pipeline {
         KEY1 = credentials("${buildenv}.key1")
     }
 
-    try {
-        stages {
-            stage('hello1') {
-                steps {
-                    echo "Hello Hello ${dev1} ${Environment}"
-                }
-            }
-            stage('notification') {
-                steps {
-                    sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
-                }
+    stages {
+        stage('hello1') {
+            steps {
+                echo "Hello Hello ${dev1} ${Environment}"
             }
         }
-        result = 'SUCCESS'
-    } catch (e) {
-        result = 'FAILURE ${e}'
-    } finally {
-        stage('Report') {
-            sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} ${result} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+        stage('notification') {
+            steps {
+                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+            }
         }
     }
 }
