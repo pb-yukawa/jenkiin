@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('hello1') {
              steps {
-                echo "Hello Hello"
+                echo "Hello Hello ${Environment}"
             }
         }
         stage('notification') {
