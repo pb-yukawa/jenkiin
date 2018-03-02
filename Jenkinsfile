@@ -26,7 +26,7 @@ pipeline {
         }
         stage('notification') {
             steps {
-                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.JOB_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
             }
         }
     }
