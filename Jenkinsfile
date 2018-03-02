@@ -26,8 +26,12 @@ pipeline {
         }
         stage('notification') {
             steps {
-                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                sendChatwork('success')
             }
         }
     }
+}
+
+def sendChatwork(message) {
+    sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
 }
