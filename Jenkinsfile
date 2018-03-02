@@ -17,7 +17,7 @@ pipeline {
                     try {
                         echo "Hello Hello ${dev1}"
                     } catch(e) {
-                        sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=FAILURE!!! test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.JOB_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                        sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=FAILURE!!! test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
                     } finally {
                         // cleaning
                     }
@@ -26,7 +26,7 @@ pipeline {
         }
         stage('notification') {
             steps {
-                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.JOB_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
             }
         }
     }
