@@ -26,7 +26,8 @@ pipeline {
         }
         stage('php') {
             steps {
-                sh "echo '<?php echo 123' | php"
+                sh "composer install"
+                sh "echo '<?php echo 123;' | php"
             }
         }
         stage('notification') {
