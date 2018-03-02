@@ -15,9 +15,9 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo "Hello Hello ${dev1} ${Environment}"
+                        echo "Hello Hello ${dev1}"
                     } catch(e) {
-                        sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=FAILURE!!! test${KEY1} ${JOB_NAME} ${BUILD_NUMBER} (${BUILD_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
+                        sh "curl -X POST -H \"X-ChatWorkToken: ${BOT_APIKEY}\" -d \"body=FAILURE!!! test${KEY1} ${env.JOB_NAME} ${env.BUILD_NUMBER} (${env.JOB_URL})\" \"https://api.chatwork.com/v2/rooms/${TEST_ROOM_ID}/messages\""
                     } finally {
                         // cleaning
                     }
